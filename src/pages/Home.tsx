@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { useAuth } from "../contexts/auth"
+import Tasks from "./Tasks"
 
 const Button = styled.button`
     border-radius: 8px;
@@ -19,11 +21,13 @@ const Button = styled.button`
 `
 
 export default function HomePage(){
+    const { signed } = useAuth()
     const navigate = useNavigate()
     return (
         <>
             <h1>Welcome to Ordo</h1>
             <Button onClick={() => navigate('/login')}>Login</Button>
+            <Tasks/>
         </>
     )
 }
