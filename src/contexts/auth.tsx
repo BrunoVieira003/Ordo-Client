@@ -7,7 +7,7 @@ interface props{
 
 interface AuthContextData {
     signed: boolean;
-    user: object | null
+    user: any,
     login(email: string, password: string): Promise<void>;
     logout(): void
 }
@@ -26,14 +26,14 @@ export const AuthProvider = ({ children }:props) => {
         setUser(response.data.user)
         api.defaults.headers.Authorization = `Bearer ${response.data.token}`
 
-        sessionStorage.setItem('@App:user', JSON.stringify(response.data.user));
-        sessionStorage.setItem('@App:token', response.data.token);
+        localStorage.setItem('@App:user', JSON.stringify(response.data.user));
+        localStorage.setItem('@App:token', response.data.token);
     }
 
     function logout(){
         setUser(null)
-        sessionStorage.removeItem('@App:user')
-        sessionStorage.removeItem('@App:token')
+        localStorage.removeItem('@App:user')
+        localStorage.removeItem('@App:token')
     }
 
     useEffect(() => {
